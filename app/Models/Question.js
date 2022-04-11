@@ -1,3 +1,4 @@
+// FIXME character codes break the game
 export class Question
 {
     constructor(data)
@@ -18,12 +19,12 @@ export class Question
 
             for(let i = 0; i < 50; i++)
             {
-                const shuffle1 = Math.floor(Math.random(this.answers.length));
-                const shuffle2 = Math.floor(Math.random(this.answers.length));
+                const shuffle1 = Math.floor(Math.random() * this.answers.length);
+                const shuffle2 = Math.floor(Math.random() * this.answers.length);
 
                 const temp = this.answers[shuffle1];
-                this.answers [shuffle1] = this.answers[shuffle2];
-                this.answers [shuffle2] = temp;
+                this.answers[shuffle1] = this.answers[shuffle2];
+                this.answers[shuffle2] = temp;
             }
         }
     }
