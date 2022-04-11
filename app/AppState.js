@@ -5,6 +5,8 @@ class AppState extends EventEmitter
 {
     questions = [];
     currentQuestion = null;
+    questionsAnswered = 0;
+    questionsCorrect = 0;
 }
 
 export const ProxyState = new Proxy(new AppState(), {

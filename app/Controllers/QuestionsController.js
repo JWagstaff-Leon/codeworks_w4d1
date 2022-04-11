@@ -11,15 +11,17 @@ function _drawQuestion()
     }
     else
     {
-        document.getElementById("question").innerHTML = "<h1>No More Questions</h1>";
+        document.getElementById("question").innerHTML = "<h1>Loading More Questions</h1>";
     }
+
+    document.getElementById("score").innerText = `${ProxyState.questionsCorrect}/${ProxyState.questionsAnswered}`;
 }
 
 export class QuestionsController
 {
     constructor()
     {
-        questionsService.getQuestions();
+        questionsService.getTenQuestions();
         ProxyState.on("questions", _drawQuestion);
         ProxyState.on("currentQuestion", _drawQuestion);
     }
@@ -28,11 +30,13 @@ export class QuestionsController
     {
         try
         {
+            console.log(answer, ProxyState.questions[ProxyState.currentQuestion].correctAnswer)
+            const correct = (answer === ProxyState.questions[ProxyState.currentQuestion].correctAnswer);
             let swalTitle = "";
             let swalText = "";
             let swalIcon = "";
 
-            if(answer === ProxyState.questions[ProxyState.currentQuestion].correctAnswer)
+            if(correct)
             {
                 swalTitle = "You did it!";
                 swalText = `You got the correct answer: ${answer}`;
@@ -54,7 +58,7 @@ export class QuestionsController
                 confirmButtonText: "Next question"
             })
 
-            questionsService.nextQuestion();
+            questionsService.nextQuestion(correct);
         }
         catch (error)
         {
