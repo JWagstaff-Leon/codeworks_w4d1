@@ -30,7 +30,6 @@ export class QuestionsController
     {
         try
         {
-            console.log(answer, ProxyState.questions[ProxyState.currentQuestion].correctAnswer)
             const correct = (answer === ProxyState.questions[ProxyState.currentQuestion].correctAnswer);
             let swalTitle = "";
             let swalText = "";
